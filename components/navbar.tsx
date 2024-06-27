@@ -12,14 +12,19 @@ export default function NavBar() {
   };
   return (
     <>
-      <nav className="bg-neutral-950">
-        <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <nav className="bg-neutral-950 fixed w-full">
+        <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 ">
+          <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <a href="/" className="text-white text-4xl">
-                  DANANUM
-                </a>
+              <div className="flex flex-col items-center">
+                <Link href="/" className="text-white text-4xl underline">
+                  LDIA
+                </Link>
+                <Link href="/">
+                  <span className="text-white text-xs">
+                    Let's divide it all
+                  </span>
+                </Link>
               </div>
             </div>
             <div className="hidden md:block">
@@ -98,7 +103,7 @@ export default function NavBar() {
                   </svg>
                 </Link>
                 <Link
-                  href="/cart"
+                  href="/member/cart"
                   className="text-white hover:bg-white hover:text-black rounded-lg p-2"
                 >
                   <svg
@@ -136,7 +141,7 @@ export default function NavBar() {
                   </svg>
                 </Link>
                 <Link
-                  href="/"
+                  href="/member/login"
                   className="text-white hover:bg-white hover:text-black rounded-lg p-2"
                 >
                   로그인
