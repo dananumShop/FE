@@ -1,0 +1,29 @@
+export const setCookie = (token: string, newAccessToken?: any) => {
+  if (typeof document !== "undefined") {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + 30 * 60 * 1000);
+    const expires = "expires=" + expirationDate.toUTCString();
+    document.cookie = "AccessToken" + "=" + token + "; " + expires + "; path=/";
+  }
+};
+
+export const getCookie = (p0?: string) => {
+  if (typeof document !== "undefined") {
+    const cookieName = "AccessToken" + "=";
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.indexOf(cookieName) === 0) {
+        return cookie.substring(cookieName.length, cookie.length);
+      }
+    }
+    return "";
+  }
+};
+
+export const deleteCookie = () => {
+  if (typeof document !== "undefined") {
+    document.cookie =
+      "AccessTOKEN" + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+};
