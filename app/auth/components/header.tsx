@@ -17,9 +17,9 @@ export default function Header() {
     setIsLoading(false); // 로딩 완료
   }, []);
 
-  if (isLoading) {
-    return null; // 로딩 중에는 아무것도 렌더링하지 않음
-  }
+  // if (isLoading) {
+  //   return null; // 로딩 중에는 아무것도 렌더링하지 않음
+  // }
   return (
     <>
       {isLogin ? (
