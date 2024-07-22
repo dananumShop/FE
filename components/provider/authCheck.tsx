@@ -12,7 +12,13 @@ export default function AuthCheck() {
 
   useEffect(() => {
     const token = getCookie();
-    const exceptions = ["/auth/login", "/auth/signup", "/category/bedding"];
+    const exceptions = [
+      "/auth/login",
+      "/auth/signup",
+      "/category/bedding",
+      "/category/totalItems",
+      "/category/clothes",
+    ];
     const isException = exceptions.includes(pathname);
 
     const checkVerified = async () => {

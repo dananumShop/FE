@@ -10,13 +10,9 @@ export default function NavBar() {
   const hoverClass = "hover:font-bold hover:text-red-600"; // Hover class
 
   const categories = [
+    { name: "전체상품", link: "/category/totalItems" },
+    { name: "내의", link: "/category/clothes" },
     { name: "침구", link: "/category/bedding" },
-    { name: "마스크", link: "/category/mask" },
-    { name: "내의", link: "/underwear" },
-    { name: "장갑", link: "/gloves" },
-    { name: "양말", link: "/socks" },
-    { name: "모자", link: "/hats" },
-    { name: "보호대", link: "/protectors" },
     { name: "기술력", link: "/technology" },
     { name: "기능성", link: "/functionality" },
     { name: "미디어", link: "/media" },

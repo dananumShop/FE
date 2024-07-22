@@ -5,7 +5,23 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const formSchema = z.object({
-  userEmail: z.string().email().toLowerCase(),
+  userEmail: z
+    .string()
+    .email()
+    .toLowerCase()
+    .refine(async (email) => {
+      try {
+        const response = await publicApi.get(
+          `/public/auth/duplicate-test/email?userEmail=${encodeURIComponent(
+            email
+          )}`
+        );
+        return response.data.duplicate;
+      } catch (error) {
+        console.error("Error checking email:", error);
+        return false;
+      }
+    }, "아이디와 비밀번호를 확인해주세요."),
   userPassword: z
     .string({
       required_error: "Password is required",
@@ -20,7 +36,7 @@ export async function logIn(prevState: any, formData: FormData) {
     userEmail: formData.get("userEmail"),
     userPassword: formData.get("userPassword"),
   };
-  const result = formSchema.safeParse(data);
+  const result = await formSchema.spa(data);
   let shouldRedirect = false;
 
   if (!result.success) {

@@ -3,7 +3,7 @@ import { privateApi } from "@/api/axiosConfig";
 export async function uploadProduct(formData: FormData) {
   try {
     // FormData에서 JSON 문자열 추출
-    const productInformationStr = formData.get("metadata") as string;
+    const productInformationStr = formData.get("productInformation") as string;
     const productInformation = JSON.parse(productInformationStr);
 
     // JSON 데이터에서 추출
