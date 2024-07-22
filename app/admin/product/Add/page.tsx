@@ -14,7 +14,7 @@ export default function AddProduct() {
   >([]);
   const [detailImgFiles, setDetailImgFiles] = useState<File[]>([]);
   const [informationImgFiles, setInformationImgFiles] = useState<File[]>([]);
-  const [category, setCategory] = useState<string>("CLOTH");
+  const [category, setCategory] = useState<string>("");
 
   const handleImageChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -65,102 +65,104 @@ export default function AddProduct() {
       form.elements.namedItem("description") as HTMLInputElement
     ).value;
 
-    const metadata = JSON.stringify({
+    const productInformation = JSON.stringify({
       productName,
       price,
       description,
       category,
     });
 
-    formData.append("metadata", metadata); // JSON 데이터 추가
+    formData.append("productInformation", productInformation); // JSON 데이터 추가
 
     await uploadProduct(formData);
   };
 
   return (
-    <div className="">
+    <div>
       <form
         onSubmit={handleSubmit}
         className="p-5 flex flex-col gap-5 items-center"
       >
-        <div className="flex">
-          <label
-            htmlFor="productDetailImg"
-            className="border-2 aspect-square flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer bg-center bg-cover w-96"
-            style={{
-              backgroundImage:
-                detailImgPreviews.length > 0
-                  ? `url(${detailImgPreviews[0]})`
-                  : undefined,
-            }}
-          >
-            {detailImgPreviews.length === 0 ? (
-              <>
-                <PhotoIcon className="w-20" />
-                <div className="text-neutral-400 text-sm">
-                  제품 상세 이미지를 추가해주세요.
-                </div>
-              </>
-            ) : null}
-          </label>
-          <input
-            onChange={(event) => handleImageChange(event, "detail")}
-            type="file"
-            id="productDetailImg"
-            name="productDetailImg"
-            accept="image/*"
-            className="hidden"
-            multiple
-          />
-
-          {detailImgPreviews.map((preview, index) => (
-            <img
-              key={`detail-${index}`}
-              src={preview}
-              alt={`Detail Preview ${index}`}
-              className="w-20 h-20 object-cover rounded-md border"
+        <div className="flex justify-between w-2/3">
+          <div className="flex">
+            <label
+              htmlFor="productDetailImg"
+              className="border-2 aspect-square flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer bg-center bg-cover w-96"
+              style={{
+                backgroundImage:
+                  detailImgPreviews.length > 0
+                    ? `url(${detailImgPreviews[0]})`
+                    : undefined,
+              }}
+            >
+              {detailImgPreviews.length === 0 ? (
+                <>
+                  <PhotoIcon className="w-20" />
+                  <div className="text-neutral-400 text-sm">
+                    제품 상세 이미지를 추가해주세요.
+                  </div>
+                </>
+              ) : null}
+            </label>
+            <input
+              onChange={(event) => handleImageChange(event, "detail")}
+              type="file"
+              id="productDetailImg"
+              name="productDetailImg"
+              accept="image/*"
+              className="hidden"
+              multiple
             />
-          ))}
-        </div>
-        <div className="flex">
-          <label
-            htmlFor="productInformationImg"
-            className="border-2 aspect-square flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer bg-center bg-cover w-96"
-            style={{
-              backgroundImage:
-                informationImgPreviews.length > 0
-                  ? `url(${informationImgPreviews[0]})`
-                  : undefined,
-            }}
-          >
-            {informationImgPreviews.length === 0 ? (
-              <>
-                <PhotoIcon className="w-20" />
-                <div className="text-neutral-400 text-sm">
-                  제품 정보 이미지를 추가해주세요.
-                </div>
-              </>
-            ) : null}
-          </label>
 
-          <input
-            onChange={(event) => handleImageChange(event, "information")}
-            type="file"
-            id="productInformationImg"
-            name="productInformationImg"
-            accept="image/*"
-            className="hidden"
-            multiple
-          />
+            {detailImgPreviews.map((preview, index) => (
+              <img
+                key={`detail-${index}`}
+                src={preview}
+                alt={`Detail Preview ${index}`}
+                className="w-20 h-20 object-cover rounded-md border"
+              />
+            ))}
+          </div>
+          <div className="flex">
+            <label
+              htmlFor="productInformationImg"
+              className="border-2 aspect-square flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer bg-center bg-cover w-96"
+              style={{
+                backgroundImage:
+                  informationImgPreviews.length > 0
+                    ? `url(${informationImgPreviews[0]})`
+                    : undefined,
+              }}
+            >
+              {informationImgPreviews.length === 0 ? (
+                <>
+                  <PhotoIcon className="w-20" />
+                  <div className="text-neutral-400 text-sm">
+                    제품 정보 이미지를 추가해주세요.
+                  </div>
+                </>
+              ) : null}
+            </label>
 
-          {informationImgPreviews.map((preview, index) => (
-            <img
-              key={`information-${index}`}
-              src={preview}
-              alt={`Information Preview ${index}`}
-              className="w-20 h-20 object-cover rounded-md border"
+            <input
+              onChange={(event) => handleImageChange(event, "information")}
+              type="file"
+              id="productInformationImg"
+              name="productInformationImg"
+              accept="image/*"
+              className="hidden"
+              multiple
             />
-          ))}
+
+            {informationImgPreviews.map((preview, index) => (
+              <img
+                key={`information-${index}`}
+                src={preview}
+                alt={`Information Preview ${index}`}
+                className="w-20 h-20 object-cover rounded-md border"
+              />
+            ))}
+          </div>
         </div>
         <div className="w-96">
           <label
